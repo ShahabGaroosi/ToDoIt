@@ -13,8 +13,8 @@ namespace ToDoIt.Model
 
         public Person(string firstName, string lastName)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
+            FirstName = firstName;
+            LastName = lastName;
             personId = ++idCounter;
         }
         public int PersonId

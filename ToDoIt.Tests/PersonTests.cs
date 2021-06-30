@@ -8,7 +8,7 @@ namespace ToDoIt.Tests
     public class PersonTests
     {
         [Fact]
-        public void IdCounterTest()
+        public void PersonIdCounterTest()
         {
             //Arrange
             string firstName = "Kent";
