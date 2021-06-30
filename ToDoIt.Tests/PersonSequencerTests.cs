@@ -9,30 +9,18 @@ namespace ToDoIt.Tests
     public class PersonSequencerTests
     {
         [Fact]
-        public void ConstructorTest()
-        {
-            //Arrange
-            int personId = 0;
-
-            //Act
-            PersonSequencer testPersonSequencer = new PersonSequencer();
-
-            //Assert
-            Assert.Equal(personId, testPersonSequencer.PersonId);
-        }
-        [Fact]
         public void NextPersonIdTest()
         {
             //Arrange
-            int personId = 2;
+            PersonSequencer testPersonSequencer = new PersonSequencer();
 
             //Act
-            PersonSequencer testPersonSequencer = new PersonSequencer();
+            int before = testPersonSequencer.PersonId;
             PersonSequencer.nextPersonId();
-            PersonSequencer.nextPersonId();
+            int result = testPersonSequencer.PersonId;
 
             //Assert
-            Assert.Equal(personId, testPersonSequencer.PersonId);
+            Assert.True(before < result);
         }
 
         [Fact]
