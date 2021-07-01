@@ -27,10 +27,10 @@ namespace ToDoIt.Tests
         public void ResetTest()
         {
             //Arrange
+            PersonSequencer testPersonSequencer = new PersonSequencer();
             int personId = 0;
 
             //Act
-            PersonSequencer testPersonSequencer = new PersonSequencer();
             PersonSequencer.nextPersonId();
             PersonSequencer.nextPersonId();
             PersonSequencer.reset();

@@ -11,11 +11,11 @@ namespace ToDoIt.Model
         private readonly int personId;
         private string firstName, lastName;
 
-        public Person(string firstName, string lastName)
+        public Person(int personId, string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
-            personId = ++idCounter;
+            this.personId = personId;
         }
         public int PersonId
         {

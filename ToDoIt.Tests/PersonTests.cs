@@ -8,46 +8,29 @@ namespace ToDoIt.Tests
     public class PersonTests
     {
         [Fact]
-        public void PersonIdCounterTest()
-        {
-            //Arrange
-            string firstName = "Kent";
-            string lastName = "Svensson";
-
-            //Act
-            int before = Person.Counter;
-            new Person(firstName, lastName);//create person to make counter count up.
-            int result = Person.Counter;
-
-            //Assert
-            Assert.True(before < result);
-        }
-
-        [Fact]
         public void PersonIdTest()
         {
             //Arrange
-            string firstName = "Kent";
-            string lastName = "Svensson";
-            string firstName2 = "Test";
-            string lastName2 = "Testsson";
+            int personId = 23;
+            string firstName = "Test";
+            string lastName = "Testsson";
 
             //Act
-            Person person1 = new Person(firstName, lastName);
-            Person person2 = new Person(firstName2, lastName2);
+            Person testPerson = new Person(personId, firstName, lastName);
 
             //Assert
-            Assert.NotEqual(person1.PersonId, person2.PersonId);
+            Assert.Equal(personId, testPerson.PersonId);
         }
 
         [Fact]
         public void NameTest()
         {
             //Arrange
-            string firstName = "Kent";
-            string lastName = "Svensson";
+            int personId = 23;
+            string firstName = "Test";
+            string lastName = "Testsson";
 
-            Person testPerson = new Person(firstName, lastName);
+            Person testPerson = new Person(personId, firstName, lastName);
 
             //Assert
             Assert.Equal(firstName, testPerson.FirstName);
