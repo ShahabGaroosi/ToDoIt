@@ -20,6 +20,16 @@ namespace ToDoIt.Model
             get { return description; }
             set { description = value; }
         }
+        public bool Done
+        {
+            get { return done; }
+            set { done = value; }
+        }
+        public Person Assigne
+        {
+            get { return assigne; }
+            set { assigne = value; }
+        }
         public Todo(int todoId, string description)
         {
             this.todoId = todoId;

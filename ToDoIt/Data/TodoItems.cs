@@ -40,5 +40,53 @@ namespace ToDoIt.Data
             todos = new Todo[0];
             TodoSequencer.reset();
         }
+        public Todo[] FindByDoneStatus(bool doneStatus)
+        {
+            List<Todo> list = new List<Todo>();
+            foreach (Todo todo in todos)
+            {
+                if (todo.Done == doneStatus)
+                {
+                    list.Add(todo);
+                }
+            }
+            return list.ToArray();
+        }
+        public Todo[] FindByAssignee(int personId)
+        {
+            List<Todo> list = new List<Todo>();
+            foreach (Todo todo in todos)
+            {
+                if (todo.Assigne.PersonId == personId)
+                {
+                    list.Add(todo);
+                }
+            }
+            return list.ToArray();
+        }
+        public Todo[] FindByAssignee(Person assignee)
+        {
+            List<Todo> list = new List<Todo>();
+            foreach (Todo todo in todos)
+            {
+                if (todo.Assigne == assignee)
+                {
+                    list.Add(todo);
+                }
+            }
+            return list.ToArray();
+        }
+        public Todo[] FindUnassignedTodoItems()
+        {
+            List<Todo> list = new List<Todo>();
+            foreach (Todo todo in todos)
+            {
+                if (todo.Assigne == null)
+                {
+                    list.Add(todo);
+                }
+            }
+            return list.ToArray();
+        }
     }
 }
