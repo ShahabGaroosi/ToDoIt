@@ -10,6 +10,20 @@ namespace ToDoIt.Tests
     public class TodoItemsTests
     {
         [Fact]
+        public void CreateTest()
+        {
+            //Arrange
+            TodoItems testTodoItems = new TodoItems();
+            string description = "Test code";
+
+            //Act
+            Todo testTodo = testTodoItems.CreateTodo(description);
+
+            //Assert
+            Assert.Equal(description, testTodo.Description);
+        }
+
+        [Fact]
         public void SizeTest()
         {
             //Arrange
@@ -44,7 +58,7 @@ namespace ToDoIt.Tests
         }
 
         [Fact]
-        public void PersonIdTest()
+        public void TodoIdTest()
         {
             //Arrange
             TodoItems testTodoItems = new TodoItems();
@@ -52,12 +66,11 @@ namespace ToDoIt.Tests
             string description2 = "Test code2";
 
             //Act
-            testTodoItems.CreateTodo(description);
-            testTodoItems.CreateTodo(description2);
-            Todo[] testTodos = testTodoItems.FindAll();
+            Todo testTodo = testTodoItems.CreateTodo(description);
+            Todo testTodo2 = testTodoItems.CreateTodo(description2);
 
             //Assert
-            Assert.NotEqual(testTodos[0].TodoId, testTodos[1].TodoId);
+            Assert.NotEqual(testTodo.TodoId, testTodo2.TodoId);
         }
 
         [Fact]
@@ -66,16 +79,13 @@ namespace ToDoIt.Tests
             //Arrange
             TodoItems testTodoItems = new TodoItems();
             string description = "Test code";
-            string description2 = "Test code2";
 
             //Act
-            testTodoItems.CreateTodo(description);
-            testTodoItems.CreateTodo(description2);
-            Todo[] testTodos = testTodoItems.FindAll();
+            Todo testTodos = testTodoItems.CreateTodo(description);
 
 
             //Assert
-            Assert.Equal(testTodos[^1], testTodoItems.FindById(testTodos[^1].TodoId));
+            Assert.Equal(testTodos, testTodoItems.FindById(testTodos.TodoId));
         }
 
         [Fact]

@@ -10,6 +10,22 @@ namespace ToDoIt.Tests
     public class PeopleTests
     {
         [Fact]
+        public void CreateTest()
+        {
+            //Arrange
+            People testPeople = new People();
+            string firstName = "Test";
+            string lastName = "Testsson";
+
+            //Act
+            Person testPerson = testPeople.CreatePerson(firstName, lastName);
+
+            //Assert
+            Assert.Equal(firstName, testPerson.FirstName);
+            Assert.Equal(lastName, testPerson.LastName);
+        }
+
+        [Fact]
         public void SizeTest()
         {
             //Arrange
@@ -57,12 +73,11 @@ namespace ToDoIt.Tests
             string lastName2 = "Testsson2";
 
             //Act
-            testPeople.CreatePerson(firstName, lastName);
-            testPeople.CreatePerson(firstName2, lastName2);
-            Person[] testPersons = testPeople.FindAll();
+            Person testPerson = testPeople.CreatePerson(firstName, lastName);
+            Person testPerson2 = testPeople.CreatePerson(firstName2, lastName2);
 
             //Assert
-            Assert.NotEqual(testPersons[0].PersonId, testPersons[1].PersonId);
+            Assert.NotEqual(testPerson.PersonId, testPerson2.PersonId);
         }
 
         [Fact]
@@ -72,17 +87,13 @@ namespace ToDoIt.Tests
             People testPeople = new People();
             string firstName = "Test";
             string lastName = "Testsson";
-            string firstName2 = "Test2";
-            string lastName2 = "Testsson2";
 
             //Act
-            testPeople.CreatePerson(firstName, lastName);
-            testPeople.CreatePerson(firstName2, lastName2);
-            Person[] testPersons = testPeople.FindAll();
+            Person testPerson = testPeople.CreatePerson(firstName, lastName);
 
 
             //Assert
-            Assert.Equal(testPersons[^1], testPeople.FindById(testPersons[^1].PersonId));
+            Assert.Equal(testPerson, testPeople.FindById(testPerson.PersonId));
         }
 
         [Fact]
