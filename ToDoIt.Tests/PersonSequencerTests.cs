@@ -33,10 +33,12 @@ namespace ToDoIt.Tests
             //Act
             PersonSequencer.nextPersonId();
             PersonSequencer.nextPersonId();
+            int before = testPersonSequencer.PersonId;
             PersonSequencer.reset();
+            int result = testPersonSequencer.PersonId;
 
             //Assert
-            Assert.Equal(personId, testPersonSequencer.PersonId);
+            Assert.True(before > result);
         }
     }
 }

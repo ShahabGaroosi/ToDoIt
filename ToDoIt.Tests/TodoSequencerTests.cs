@@ -33,10 +33,12 @@ namespace ToDoIt.Tests
             TodoSequencer testTodoSequencer = new TodoSequencer();
             TodoSequencer.nextTodoId();
             TodoSequencer.nextTodoId();
+            int before = testTodoSequencer.TodoId;
             TodoSequencer.reset();
+            int result = testTodoSequencer.TodoId;
 
             //Assert
-            Assert.Equal(todoId, testTodoSequencer.TodoId);
+            Assert.True(before > result);
         }
     }
 }
