@@ -46,7 +46,7 @@ namespace ToDoIt.Data
         }
         public Todo[] FindByAssignee(int personId)
         {
-            return FindTodoItems(todo => (todo.Assigne.PersonId == personId));
+            return FindTodoItems(todo => (todo.Assigne != null)&&(todo.Assigne.PersonId == personId));
         }
         public Todo[] FindByAssignee(Person assigne)
         {

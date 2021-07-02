@@ -46,11 +46,7 @@ namespace ToDoIt.Tests
         public void FindAllTest()
         {
             //Arrange
-            People testPeople = new People();
-            for (int i = 0; i < 5; i++)
-            {
-                testPeople.CreatePerson($"Test{i}", $"Testsson{i}");
-            }
+            People testPeople = ArrangeTest();
 
             //Act
             Person[] testPersons = testPeople.FindAll();
@@ -64,12 +60,8 @@ namespace ToDoIt.Tests
         public void PersonIdTest()
         {
             //Arrange
-            People testPeople = new People();
-            Person[] testPersons = new Person[5];
-            for (int i = 0; i < testPersons.Length; i++)
-            {
-                testPersons[i] = testPeople.CreatePerson($"Test{i}", $"Testsson{i}");
-            }
+            People testPeople = ArrangeTest();
+            Person[] testPersons = testPeople.FindAll();
 
             //Act
             //Assert
@@ -80,27 +72,19 @@ namespace ToDoIt.Tests
         public void FindByIdTest()
         {
             //Arrange
-            People testPeople = new People();
-            Person[] testPersons = new Person[5];
-            for (int i = 0; i < testPersons.Length; i++)
-            {
-                testPersons[i] = testPeople.CreatePerson($"Test{i}", $"Testsson{i}");
-            }
+            People testPeople = ArrangeTest();
+            Person testPerson = testPeople.FindAll()[2];
 
             //Act
             //Assert
-            Assert.Equal(testPersons[2], testPeople.FindById(testPersons[2].PersonId));
+            Assert.Equal(testPerson, testPeople.FindById(testPerson.PersonId));
         }
 
         [Fact]
         public void ClearTest()
         {
             //Arrange
-            People testPeople = new People();
-            for (int i = 0; i < 5; i++)
-            {
-                testPeople.CreatePerson($"Test{i}", $"Testsson{i}");
-            }
+            People testPeople = ArrangeTest();
 
             //Act
             testPeople.Clear();
@@ -114,19 +98,25 @@ namespace ToDoIt.Tests
         public void ExcludeByIdTest()
         {
             //Arrange
-            People testPeople = new People();
-            Person[] testPersons = new Person[5];
-            for (int i = 0; i < testPersons.Length; i++)
-            {
-                testPersons[i] = testPeople.CreatePerson($"Test{i}", $"Testsson{i}");
-            }
-            int personId = testPersons[2].PersonId;
+            People testPeople = ArrangeTest();
+            int personId = testPeople.FindAll()[2].PersonId;
 
             //Act
             testPeople.ExcludeById(personId);
 
             //Assert
             Assert.Throws<ArgumentException>(() => testPeople.FindById(personId));
+        }
+
+        public People ArrangeTest()
+        {
+            People testPeople = new People();
+            Person[] testPersons = new Person[5];
+            for (int i = 0; i < testPersons.Length; i++)
+            {
+                testPersons[i] = testPeople.CreatePerson($"Test{i}", $"Testsson{i}");
+            }
+            return testPeople;
         }
     }
 }

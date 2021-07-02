@@ -109,14 +109,7 @@ namespace ToDoIt.Tests
         public void FindByDoneStatusTest()
         {
             //Arrange
-            TodoItems testTodoItems = new TodoItems();
-            Todo[] testTodo = new Todo[5];
-            for (int i = 0; i < testTodo.Length; i++)
-            {
-                testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
-            }
-            testTodo[1].Done = true;
-            testTodo[4].Done = true;
+            TodoItems testTodoItems = ArrangeTest();
 
             //Act
             Todo[] testTodoDone = testTodoItems.FindByDoneStatus(true);
@@ -139,58 +132,37 @@ namespace ToDoIt.Tests
         public void FindByAssigneeIdTest()
         {
             //Arrange
-            People persons = new People();
-            TodoItems testTodoItems = new TodoItems();
-            Todo[] testTodo = new Todo[5];
-            for (int i = 0; i < testTodo.Length; i++)
-            {
-                testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
-                testTodo[i].Assigne = persons.CreatePerson("Test", "Testsson");
-            }
+            TodoItems testTodoItems = ArrangeTest();
+            Todo testTodo0 = testTodoItems.FindAll()[1];
 
             //Act
-            Todo[] testTodo2 = testTodoItems.FindByAssignee(testTodo[2].Assigne.PersonId);
+            Todo[] testTodo1 = testTodoItems.FindByAssignee(testTodo0.Assigne.PersonId);
 
             //Assert
-            Assert.Single(testTodo2);
-            Assert.Equal(testTodo[2], testTodo2[0]);
+            Assert.Single(testTodo1);
+            Assert.Equal(testTodo0, testTodo1[0]);
         }
 
         [Fact]
         public void FindByAssigneeTest()
         {
             //Arrange
-            People persons = new People();
-            TodoItems testTodoItems = new TodoItems();
-            Todo[] testTodo = new Todo[5];
-            for (int i = 0; i < testTodo.Length; i++)
-            {
-                testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
-                testTodo[i].Assigne = persons.CreatePerson("Test", "Testsson");
-            }
+            TodoItems testTodoItems = ArrangeTest();
+            Todo testTodo0 = testTodoItems.FindAll()[1];
 
             //Act
-            Todo[] testTodo2 = testTodoItems.FindByAssignee(testTodo[2].Assigne);
+            Todo[] testTodo1 = testTodoItems.FindByAssignee(testTodo0.Assigne);
 
             //Assert
-            Assert.Single(testTodo2);
-            Assert.Equal(testTodo[2], testTodo2[0]);
+            Assert.Single(testTodo1);
+            Assert.Equal(testTodo0, testTodo1[0]);
         }
 
         [Fact]
         public void FindUnassignedTodoItemsTest()
         {
             //Arrange
-            People testPeople = new People();
-            TodoItems testTodoItems = new TodoItems();
-            Todo[] testTodo = new Todo[5];
-            for (int i = 0; i < 5; i++)
-            {
-                testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
-            }
-            testTodo[1].Assigne = testPeople.CreatePerson("Test1","Testsson1");
-            testTodo[4].Assigne = testPeople.CreatePerson("Test1", "Testsson1");
-
+            TodoItems testTodoItems = ArrangeTest();
             //Act
             Todo[] testTodo2 = testTodoItems.FindUnassignedTodoItems();
 
@@ -206,19 +178,31 @@ namespace ToDoIt.Tests
         public void ExcludeByIdTest()
         {
             //Arrange
-            TodoItems testTodoItems = new TodoItems();
-            Todo[] testTodo = new Todo[5];
-            for (int i = 0; i < testTodo.Length; i++)
-            {
-                testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
-            }
-            int todoId = testTodo[2].TodoId;
+            TodoItems testTodoItems = ArrangeTest();
+            int todoId = testTodoItems.FindAll()[2].TodoId;
 
             //Act
             testTodoItems.ExcludeById(todoId);
 
             //Assert
             Assert.Throws<ArgumentException>(() => testTodoItems.FindById(todoId));
+        }
+
+        public TodoItems ArrangeTest()
+        {
+            //Arrange
+            People testPeople = new People();
+            TodoItems testTodoItems = new TodoItems();
+            Todo[] testTodo = new Todo[5];
+            for (int i = 0; i < 5; i++)
+            {
+                testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
+            }
+            testTodo[1].Assigne = testPeople.CreatePerson("Test1", "Testsson1");
+            testTodo[4].Assigne = testPeople.CreatePerson("Test4", "Testsson4");
+            testTodo[1].Done = true;
+            testTodo[4].Done = true;
+            return testTodoItems;
         }
     }
 }
