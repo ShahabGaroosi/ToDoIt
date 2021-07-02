@@ -64,12 +64,12 @@ namespace ToDoIt.Data
             }
             return list.ToArray();
         }
-        public Todo[] FindByAssignee(Person assignee)
+        public Todo[] FindByAssignee(Person assigne)
         {
             List<Todo> list = new List<Todo>();
             foreach (Todo todo in todos)
             {
-                if (todo.Assigne == assignee)
+                if (todo.Assigne == assigne)
                 {
                     list.Add(todo);
                 }

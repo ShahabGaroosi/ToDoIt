@@ -119,13 +119,19 @@ namespace ToDoIt.Tests
             testTodo[4].Done = true;
 
             //Act
-            Todo[] testTodo2 = testTodoItems.FindByDoneStatus(true);
+            Todo[] testTodoDone = testTodoItems.FindByDoneStatus(true);
+            Todo[] testTodoNotDone = testTodoItems.FindByDoneStatus(false);
 
             //Assert
-            Assert.True(2 <= testTodo2.Length);
-            foreach (Todo todo in testTodo2)
+            Assert.True(2 <= testTodoDone.Length);
+            foreach (Todo todo in testTodoDone)
             {
                 Assert.True(todo.Done);
+            }
+            Assert.True(3 <= testTodoNotDone.Length);
+            foreach (Todo todo in testTodoNotDone)
+            {
+                Assert.False(todo.Done);
             }
         }
 
@@ -177,23 +183,24 @@ namespace ToDoIt.Tests
         public void FindUnassignedTodoItemsTest()
         {
             //Arrange
+            People testPeople = new People();
             TodoItems testTodoItems = new TodoItems();
             Todo[] testTodo = new Todo[5];
             for (int i = 0; i < 5; i++)
             {
                 testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
             }
-            testTodo[1].Done = true;
-            testTodo[4].Done = true;
+            testTodo[1].Assigne = testPeople.CreatePerson("Test1","Testsson1");
+            testTodo[4].Assigne = testPeople.CreatePerson("Test1", "Testsson1");
 
             //Act
-            Todo[] testTodo2 = testTodoItems.FindByDoneStatus(false);
+            Todo[] testTodo2 = testTodoItems.FindUnassignedTodoItems();
 
             //Assert
             Assert.True(3 <= testTodo2.Length);
             foreach (Todo todo in testTodo2)
             {
-                Assert.False(todo.Done);
+                Assert.Null(todo.Assigne);
             }
         }
 
