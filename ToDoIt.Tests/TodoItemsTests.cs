@@ -194,7 +194,7 @@ namespace ToDoIt.Tests
             People testPeople = new People();
             TodoItems testTodoItems = new TodoItems();
             Todo[] testTodo = new Todo[5];
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < testTodo.Length; i++)
             {
                 testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
             }
