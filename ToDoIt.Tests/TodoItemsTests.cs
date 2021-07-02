@@ -43,13 +43,9 @@ namespace ToDoIt.Tests
         public void FindAllTest()
         {
             //Arrange
-            TodoItems testTodoItems = new TodoItems();
-            string description = "Test code";
-            string description2 = "Test code2";
+            TodoItems testTodoItems = ArrangeTest();
 
             //Act
-            testTodoItems.CreateTodo(description);
-            testTodoItems.CreateTodo(description2);
             Todo[] testTodos = testTodoItems.FindAll();
             int size = testTodoItems.Size();
 
@@ -61,42 +57,36 @@ namespace ToDoIt.Tests
         public void TodoIdTest()
         {
             //Arrange
-            TodoItems testTodoItems = new TodoItems();
-            string description = "Test code";
-            string description2 = "Test code2";
+            TodoItems testTodoItems = ArrangeTest();
 
             //Act
-            Todo testTodo = testTodoItems.CreateTodo(description);
-            Todo testTodo2 = testTodoItems.CreateTodo(description2);
+            Todo[] testTodos = testTodoItems.FindAll();
 
             //Assert
-            Assert.NotEqual(testTodo.TodoId, testTodo2.TodoId);
+            Assert.NotEqual(testTodos[1].TodoId, testTodos[4].TodoId);
         }
 
         [Fact]
         public void FindByIdTest()
         {
             //Arrange
-            TodoItems testTodoItems = new TodoItems();
-            string description = "Test code";
+            TodoItems testTodoItems = ArrangeTest();
 
             //Act
-            Todo testTodos = testTodoItems.CreateTodo(description);
+            Todo testTodo = testTodoItems.FindAll()[1];
 
 
             //Assert
-            Assert.Equal(testTodos, testTodoItems.FindById(testTodos.TodoId));
+            Assert.Equal(testTodo, testTodoItems.FindById(testTodo.TodoId));
         }
 
         [Fact]
         public void ClearTest()
         {
             //Arrange
-            TodoItems testTodoItems = new TodoItems();
-            string description = "Test code";
+            TodoItems testTodoItems = ArrangeTest();
 
             //Act
-            testTodoItems.CreateTodo(description);
             testTodoItems.Clear();
             Todo[] testTodos = testTodoItems.FindAll();
 
