@@ -88,5 +88,20 @@ namespace ToDoIt.Data
             }
             return list.ToArray();
         }
+        public void ExcludeById(int todoId)
+        {
+            for (int i = 0; i < todos.Length; i++)
+            {
+                if(todos[i].TodoId == todoId)
+                {
+                    if ((i > 0) && (i < todos.Length - 1))
+                    {
+                        Array.Copy(todos, i + 1, todos, i, todos.Length - 1 - i);
+                    }
+                    Array.Resize(ref todos, todos.Length - 1);
+                    break;
+                }
+            }
+        }
     }
 }

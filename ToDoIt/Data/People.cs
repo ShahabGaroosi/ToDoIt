@@ -40,5 +40,20 @@ namespace ToDoIt.Data
             persons = new Person[0];
             PersonSequencer.reset();
         }
+        public void ExcludeById(int personId)
+        {
+            for (int i = 0; i < persons.Length; i++)
+            {
+                if (persons[i].PersonId == personId)
+                {
+                    if ((i > 0) && (i < persons.Length - 1))
+                    {
+                        Array.Copy(persons, i + 1, persons, i, persons.Length - 1 - i);
+                    }
+                    Array.Resize(ref persons, persons.Length - 1);
+                    break;
+                }
+            }
+        }
     }
 }

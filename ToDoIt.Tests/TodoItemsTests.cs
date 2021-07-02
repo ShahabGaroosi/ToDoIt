@@ -111,7 +111,7 @@ namespace ToDoIt.Tests
             //Arrange
             TodoItems testTodoItems = new TodoItems();
             Todo[] testTodo = new Todo[5];
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < testTodo.Length; i++)
             {
                 testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
             }
@@ -136,7 +136,7 @@ namespace ToDoIt.Tests
             People persons = new People();
             TodoItems testTodoItems = new TodoItems();
             Todo[] testTodo = new Todo[5];
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < testTodo.Length; i++)
             {
                 testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
                 testTodo[i].Assigne = persons.CreatePerson("Test", "Testsson");
@@ -158,7 +158,7 @@ namespace ToDoIt.Tests
             People persons = new People();
             TodoItems testTodoItems = new TodoItems();
             Todo[] testTodo = new Todo[5];
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < testTodo.Length; i++)
             {
                 testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
                 testTodo[i].Assigne = persons.CreatePerson("Test", "Testsson");
@@ -195,6 +195,25 @@ namespace ToDoIt.Tests
             {
                 Assert.False(todo.Done);
             }
+        }
+
+        [Fact]
+        public void ExcludeByIdTest()
+        {
+            //Arrange
+            TodoItems testTodoItems = new TodoItems();
+            Todo[] testTodo = new Todo[5];
+            for (int i = 0; i < testTodo.Length; i++)
+            {
+                testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
+            }
+            int todoId = testTodo[2].TodoId;
+
+            //Act
+            testTodoItems.ExcludeById(todoId);
+
+            //Assert
+            Assert.Throws<ArgumentException>(() => testTodoItems.FindById(todoId));
         }
     }
 }
