@@ -147,14 +147,13 @@ namespace ToDoIt.Tests
                 testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
                 testTodo[i].Assigne = persons.CreatePerson("Test", "Testsson");
             }
-            int personId = testTodo[3].Assigne.PersonId;
 
             //Act
-            Todo[] testTodo2 = testTodoItems.FindByAssignee(personId);
+            Todo[] testTodo2 = testTodoItems.FindByAssignee(testTodo[2].Assigne.PersonId);
 
             //Assert
             Assert.Single(testTodo2);
-            Assert.Equal(testTodo[3], testTodo2[0]);
+            Assert.Equal(testTodo[2], testTodo2[0]);
         }
 
         [Fact]
@@ -169,14 +168,13 @@ namespace ToDoIt.Tests
                 testTodo[i] = testTodoItems.CreateTodo($"Test code{i}");
                 testTodo[i].Assigne = persons.CreatePerson("Test", "Testsson");
             }
-            Person person = testTodo[3].Assigne;
 
             //Act
-            Todo[] testTodo2 = testTodoItems.FindByAssignee(person);
+            Todo[] testTodo2 = testTodoItems.FindByAssignee(testTodo[2].Assigne);
 
             //Assert
             Assert.Single(testTodo2);
-            Assert.Equal(testTodo[3], testTodo2[0]);
+            Assert.Equal(testTodo[2], testTodo2[0]);
         }
 
         [Fact]

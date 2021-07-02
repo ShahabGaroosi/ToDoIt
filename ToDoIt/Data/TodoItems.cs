@@ -42,46 +42,26 @@ namespace ToDoIt.Data
         }
         public Todo[] FindByDoneStatus(bool doneStatus)
         {
-            List<Todo> list = new List<Todo>();
-            foreach (Todo todo in todos)
-            {
-                if (todo.Done == doneStatus)
-                {
-                    list.Add(todo);
-                }
-            }
-            return list.ToArray();
+            return FindTodoItems(todo => (todo.Done == doneStatus));
         }
         public Todo[] FindByAssignee(int personId)
         {
-            List<Todo> list = new List<Todo>();
-            foreach (Todo todo in todos)
-            {
-                if (todo.Assigne.PersonId == personId)
-                {
-                    list.Add(todo);
-                }
-            }
-            return list.ToArray();
+            return FindTodoItems(todo => (todo.Assigne.PersonId == personId));
         }
         public Todo[] FindByAssignee(Person assigne)
         {
-            List<Todo> list = new List<Todo>();
-            foreach (Todo todo in todos)
-            {
-                if (todo.Assigne == assigne)
-                {
-                    list.Add(todo);
-                }
-            }
-            return list.ToArray();
+            return FindTodoItems(todo => (todo.Assigne == assigne));
         }
         public Todo[] FindUnassignedTodoItems()
+        {
+            return FindTodoItems(todo => (todo.Assigne == null));
+        }
+        public Todo[] FindTodoItems(Func<Todo,bool> fun)
         {
             List<Todo> list = new List<Todo>();
             foreach (Todo todo in todos)
             {
-                if (todo.Assigne == null)
+                if (fun(todo))
                 {
                     list.Add(todo);
                 }
